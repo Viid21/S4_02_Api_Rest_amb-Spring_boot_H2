@@ -67,13 +67,14 @@ class ServiceTests {
     void updateFruit_shouldModifyAnExistingFruit() {
         Fruit existing = new Fruit("Apple", 1);
         Fruit updatedData = new Fruit("Apple2", 5);
+        Fruit saved = new Fruit("Apple2", 5);
 
         when(repo.findById(existing.getId())).thenReturn(Optional.of(existing));
+        when(repo.save(any(Fruit.class))).thenReturn(saved);
 
         Fruit result = service.updateFruit(existing.getId(), updatedData);
 
-        assertEquals(existing.getId(), result.getId());
-        assertEquals("", result.toString());
+        assertEquals("Fruit{id=" + result.getId() + ", name='Apple2', weightInKilos=5}", result.toString());
 
         verify(repo, times(1)).findById(existing.getId());
         verify(repo, times(1)).save(any(Fruit.class));
@@ -82,11 +83,11 @@ class ServiceTests {
     @Test
     void deleteFruit_shouldCreateAndReturnFruit() {
         Fruit existing = new Fruit("Apple", 1);
-        when(repo.findById(1L)).thenReturn(Optional.of(existing));
+        when(repo.findById(existing.getId())).thenReturn(Optional.of(existing));
 
         service.deleteFruit(existing.getId());
 
-        verify(repo, times(1)).findById(1L);
-        verify(repo, times(1)).deleteById(1L);
+        verify(repo, times(1)).findById(existing.getId());
+        verify(repo, times(1)).deleteById(existing.getId());
     }
 }
