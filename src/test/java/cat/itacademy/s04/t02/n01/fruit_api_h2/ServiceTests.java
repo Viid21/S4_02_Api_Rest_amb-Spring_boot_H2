@@ -9,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,16 +37,13 @@ class ServiceTests {
 
     @Test
     void getAllFruits_shouldReturnAllExistingTasks() {
-        Iterable<Fruit> fruits = List.of(
+        List<Fruit> fruits = List.of(
                 new Fruit("Apple", 1),
                 new Fruit("Apple2", 1)
         );
         when(repo.findAll()).thenReturn(fruits);
 
-        Iterable<Fruit> resultIterable = service.getAllFruits();
-        List<Fruit> result = new ArrayList<>();
-
-        resultIterable.forEach(result::add);
+        List<Fruit> result = service.getAllFruits();
 
         assertNotNull(result);
         assertEquals(2, result.size());

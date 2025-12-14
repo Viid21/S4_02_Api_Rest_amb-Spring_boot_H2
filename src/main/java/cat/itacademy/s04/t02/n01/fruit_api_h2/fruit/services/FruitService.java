@@ -7,7 +7,7 @@ import java.util.List;
 public interface FruitService {
     Fruit addFruit(Fruit fruit);
 
-    Iterable<Fruit> getAllFruits();
+    List<Fruit> getAllFruits();
 
     Fruit getFruitById(long id);
 
