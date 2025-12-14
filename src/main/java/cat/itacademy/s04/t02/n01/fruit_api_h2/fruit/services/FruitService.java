@@ -6,8 +6,12 @@ import java.util.List;
 
 public interface FruitService {
     Fruit addFruit(Fruit fruit);
-    List<Fruit> getAllFruits();
+
+    Iterable<Fruit> getAllFruits();
+
     Fruit getFruitById(long id);
-    Fruit updateFruit(long id ,Fruit fruit);
+
+    Fruit updateFruit(long id, Fruit fruit);
+
     void deleteFruit(long id);
 }

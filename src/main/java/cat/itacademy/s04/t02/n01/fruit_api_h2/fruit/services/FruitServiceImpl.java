@@ -1,11 +1,10 @@
 package cat.itacademy.s04.t02.n01.fruit_api_h2.fruit.services;
+
 import cat.itacademy.s04.t02.n01.fruit_api_h2.fruit.exception.FruitNotFound;
 import cat.itacademy.s04.t02.n01.fruit_api_h2.fruit.model.Fruit;
 import cat.itacademy.s04.t02.n01.fruit_api_h2.fruit.repository.FruitRepository;
 
-import java.util.List;
-
-public class FruitServiceImpl implements FruitService{
+public class FruitServiceImpl implements FruitService {
     private final FruitRepository repo;
 
     public FruitServiceImpl(FruitRepository repo) {
@@ -18,8 +17,8 @@ public class FruitServiceImpl implements FruitService{
     }
 
     @Override
-    public List<Fruit> getAllFruits() {
-        return repo.getAll();
+    public Iterable<Fruit> getAllFruits() {
+        return repo.findAll();
     }
 
     @Override
