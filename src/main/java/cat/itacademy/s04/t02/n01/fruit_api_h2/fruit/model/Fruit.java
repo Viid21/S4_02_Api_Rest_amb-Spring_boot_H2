@@ -13,6 +13,9 @@ public class Fruit {
     private String name;
     private int weightInKilos;
 
+    public Fruit() {
+    }
+
     public Fruit(String name, int weightInKilos) {
         this.name = name;
         this.weightInKilos = weightInKilos;

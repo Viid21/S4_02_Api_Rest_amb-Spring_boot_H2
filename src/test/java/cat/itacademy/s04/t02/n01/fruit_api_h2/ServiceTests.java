@@ -1,6 +1,6 @@
 package cat.itacademy.s04.t02.n01.fruit_api_h2;
 
-import cat.itacademy.s04.t02.n01.fruit_api_h2.fruit.exception.FruitNotFound;
+import cat.itacademy.s04.t02.n01.fruit_api_h2.fruit.exception.FruitNotFoundException;
 import cat.itacademy.s04.t02.n01.fruit_api_h2.fruit.model.Fruit;
 import cat.itacademy.s04.t02.n01.fruit_api_h2.fruit.repository.FruitRepository;
 import cat.itacademy.s04.t02.n01.fruit_api_h2.fruit.services.FruitServiceImpl;
@@ -60,7 +60,7 @@ class ServiceTests {
         Fruit result = service.getFruitById(1L);
 
         assertEquals("Apple", result.getName());
-        assertThrows(FruitNotFound.class, () -> service.getFruitById(2L));
+        assertThrows(FruitNotFoundException.class, () -> service.getFruitById(2L));
     }
 
     @Test
