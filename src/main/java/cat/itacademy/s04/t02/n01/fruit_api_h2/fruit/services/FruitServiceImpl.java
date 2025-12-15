@@ -1,10 +1,14 @@
 package cat.itacademy.s04.t02.n01.fruit_api_h2.fruit.services;
-import cat.itacademy.s04.t02.n01.fruit_api_h2.fruit.exception.FruitNotFound;
+
+import cat.itacademy.s04.t02.n01.fruit_api_h2.fruit.exception.FruitNotFoundException;
+import cat.itacademy.s04.t02.n01.fruit_api_h2.fruit.exception.FruitsListEmptyException;
 import cat.itacademy.s04.t02.n01.fruit_api_h2.fruit.model.Fruit;
 import cat.itacademy.s04.t02.n01.fruit_api_h2.fruit.repository.FruitRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class FruitServiceImpl implements FruitService{
     private final FruitRepository repo;
 
@@ -19,13 +23,18 @@ public class FruitServiceImpl implements FruitService{
 
     @Override
     public List<Fruit> getAllFruits() {
-        return repo.findAll();
+        List<Fruit> fruits = repo.findAll();
+        if(!fruits.isEmpty()){
+            return fruits;
+        }else{
+            throw new FruitsListEmptyException();
+        }
     }
 
     @Override
     public Fruit getFruitById(long id) {
         return repo.findById(id)
-                .orElseThrow(FruitNotFound::new);
+                .orElseThrow(FruitNotFoundException::new);
     }
 
     @Override
